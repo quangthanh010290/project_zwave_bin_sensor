@@ -1,0 +1,32 @@
+  Revised: Monday, June 26, 2017
+          Revision: 
+
+
+
+
+
+
+
+Bill Of Materials           June 28,2017      11:22:26	Page1
+
+Item	Quantity	Reference	Part
+______________________________________________
+
+1	1	AN1	MyAntena
+2	6	C1,C2,C3,C4,C5,C6	104
+3	2	C7,C9	33nF
+4	1	C8	3.3pF
+5	1	C10	4.7uF
+6	1	D1	PWM LED
+7	1	D2	STATUS LED
+8	1	J1	AC IN
+9	1	J2	BUTTON IN
+10	1	J3	CON7
+11	1	L1	3.9 nH
+12	1	M1	12V
+13	5	R1,R2,R3,R4,R6	10K
+14	1	R7	0R
+15	2	R8,R9	330R
+16	1	U1	AMS1117
+17	1	U2	25LC128-I/SN
+18	1	U3	ZM5202AU-CME3R

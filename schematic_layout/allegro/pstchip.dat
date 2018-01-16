@@ -1,0 +1,372 @@
+FILE_TYPE=LIBRARY_PARTS;
+{ Using PSTWRITER 17.2.0 d001Jun-28-2017 at 11:25:00}
+primitive 'MYANTENA_MYANTENA_MYANTENA';
+  pin
+    'AN':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='MyAntena';
+    JEDEC_TYPE='MyAntena';
+    VALUE='MyAntena';
+  end_body;
+end_primitive;
+primitive 'CAPACITOR NON-POL_CAP_SMD_0603_';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='CAPACITOR NON-POL';
+    JEDEC_TYPE='cap_smd_0603';
+    VALUE='104';
+  end_body;
+end_primitive;
+primitive 'CAPACITOR NON-POL_CAP_SMD_060_1';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='CAPACITOR NON-POL';
+    JEDEC_TYPE='cap_smd_0603';
+    VALUE='4.7uF';
+  end_body;
+end_primitive;
+primitive 'CAPACITOR NON-POL_CAP_SMD_060_2';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='CAPACITOR NON-POL';
+    JEDEC_TYPE='cap_smd_0603';
+    VALUE='33nF';
+  end_body;
+end_primitive;
+primitive 'CAPACITOR NON-POL_CAP_SMD_060_3';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='CAPACITOR NON-POL';
+    JEDEC_TYPE='cap_smd_0603';
+    VALUE='3.3pF';
+  end_body;
+end_primitive;
+primitive 'LED_LED_SMD_0603_PWM LED';
+  pin
+    'ANODE':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+    'CATHODE':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='LED';
+    JEDEC_TYPE='led_smd_0603';
+    VALUE='PWM LED';
+  end_body;
+end_primitive;
+primitive 'LED_LED_SMD_0603_STATUS LED';
+  pin
+    'ANODE':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+    'CATHODE':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='LED';
+    JEDEC_TYPE='led_smd_0603';
+    VALUE='STATUS LED';
+  end_body;
+end_primitive;
+primitive 'CON2_KF850_2P_AC IN';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='CON2';
+    JEDEC_TYPE='KF850_2P';
+    VALUE='AC IN';
+  end_body;
+end_primitive;
+primitive 'CON4_CONNECTOR4PINS_BUTTON IN';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+    '3':
+      PIN_NUMBER='(3)';
+      PINUSE='UNSPEC';
+    '4':
+      PIN_NUMBER='(4)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='CON4';
+    JEDEC_TYPE='connector4pins';
+    VALUE='BUTTON IN';
+  end_body;
+end_primitive;
+primitive 'CON7_J1_7_254_CON7';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+    '3':
+      PIN_NUMBER='(3)';
+      PINUSE='UNSPEC';
+    '4':
+      PIN_NUMBER='(4)';
+      PINUSE='UNSPEC';
+    '5':
+      PIN_NUMBER='(5)';
+      PINUSE='UNSPEC';
+    '6':
+      PIN_NUMBER='(6)';
+      PINUSE='UNSPEC';
+    '7':
+      PIN_NUMBER='(7)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='CON7';
+    JEDEC_TYPE='J1_7_254';
+    VALUE='CON7';
+  end_body;
+end_primitive;
+primitive 'INDUCTOR_RES_SMD_0603_3.9 NH';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='INDUCTOR';
+    JEDEC_TYPE='res_smd_0603';
+    VALUE='3.9 nH';
+  end_body;
+end_primitive;
+primitive 'AC2DC_MODULE_AC2DC_CONVERTER_12';
+  pin
+    'AC1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    'AC2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+    '+':
+      PIN_NUMBER='(3)';
+      PINUSE='UNSPEC';
+    '5V':
+      PIN_NUMBER='(4)';
+      PINUSE='UNSPEC';
+    '-':
+      PIN_NUMBER='(5)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='AC2DC_Module';
+    JEDEC_TYPE='AC2DC_Converter';
+    VALUE='12V';
+  end_body;
+end_primitive;
+primitive 'R_RES_SMD_0603_10K';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='R';
+    JEDEC_TYPE='res_smd_0603';
+    VALUE='10K';
+  end_body;
+end_primitive;
+primitive 'R_RES_SMD_0603_0R';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='R';
+    JEDEC_TYPE='res_smd_0603';
+    VALUE='0R';
+  end_body;
+end_primitive;
+primitive 'R_RES_SMD_0603_330R';
+  pin
+    '1':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    '2':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='R';
+    JEDEC_TYPE='res_smd_0603';
+    VALUE='330R';
+  end_body;
+end_primitive;
+primitive 'ASM1117_SOT223_AMS1117';
+  pin
+    'VIN':
+      PIN_NUMBER='(3)';
+      PINUSE='UNSPEC';
+    'VOUT':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+    'GND':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='ASM1117';
+    JEDEC_TYPE='SOT223';
+    VALUE='AMS1117';
+  end_body;
+end_primitive;
+primitive 'SPI EPPROM SOIC-8_SOIC_8_25LC12';
+  pin
+    'C\S\':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    'SO':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+    'W\P':
+      PIN_NUMBER='(3)';
+      PINUSE='UNSPEC';
+    'GND':
+      PIN_NUMBER='(4)';
+      PINUSE='POWER';
+    'SI':
+      PIN_NUMBER='(5)';
+      PINUSE='UNSPEC';
+    'SCK':
+      PIN_NUMBER='(6)';
+      PINUSE='UNSPEC';
+    'H\D\':
+      PIN_NUMBER='(7)';
+      PINUSE='UNSPEC';
+    'VCC':
+      PIN_NUMBER='(8)';
+      PINUSE='POWER';
+  end_pin;
+  body
+    PART_NAME='SPI EPPROM SOIC-8';
+    JEDEC_TYPE='SOIC_8';
+    VALUE='25LC128-I/SN';
+  end_body;
+end_primitive;
+primitive 'ZM5202_ZM5202_ZM5202AU-CME3R';
+  pin
+    'RESET_N':
+      PIN_NUMBER='(2)';
+      PINUSE='UNSPEC';
+    'P1.7/INT1':
+      PIN_NUMBER='(3)';
+      PINUSE='UNSPEC';
+    'P1.6/ PWM/INT0':
+      PIN_NUMBER='(4)';
+      PINUSE='UNSPEC';
+    'P1.5':
+      PIN_NUMBER='(5)';
+      PINUSE='UNSPEC';
+    'P1.4/SCK':
+      PIN_NUMBER='(8)';
+      PINUSE='UNSPEC';
+    'P1.3/ MOSI':
+      PIN_NUMBER='(9)';
+      PINUSE='UNSPEC';
+    'P1.2/ MISO':
+      PIN_NUMBER='(7)';
+      PINUSE='UNSPEC';
+    'P1.1/ ADC3/RXD':
+      PIN_NUMBER='(10)';
+      PINUSE='UNSPEC';
+    'P1.0/ ADC2/ TXD':
+      PIN_NUMBER='(15)';
+      PINUSE='UNSPEC';
+    'P0.1/ ADC1/TRIAC':
+      PIN_NUMBER='(13)';
+      PINUSE='UNSPEC';
+    'P0.0/ ADC0/ ZEROX':
+      PIN_NUMBER='(14)';
+      PINUSE='UNSPEC';
+    'VPP':
+      PIN_NUMBER='(16)';
+      PINUSE='UNSPEC';
+    '3V3':
+      PIN_NUMBER='(11)';
+      PINUSE='UNSPEC';
+    'RF':
+      PIN_NUMBER='(19)';
+      PINUSE='UNSPEC';
+    'GND0':
+      PIN_NUMBER='(1)';
+      PINUSE='UNSPEC';
+    'GND1':
+      PIN_NUMBER='(6)';
+      PINUSE='UNSPEC';
+    'GND2':
+      PIN_NUMBER='(12)';
+      PINUSE='UNSPEC';
+    'GND3':
+      PIN_NUMBER='(17)';
+      PINUSE='UNSPEC';
+    'GND4':
+      PIN_NUMBER='(18)';
+      PINUSE='UNSPEC';
+  end_pin;
+  body
+    PART_NAME='ZM5202';
+    JEDEC_TYPE='ZM5202';
+    VALUE='ZM5202AU-CME3R';
+  end_body;
+end_primitive;
+END.

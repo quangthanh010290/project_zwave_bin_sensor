@@ -1,0 +1,133 @@
+\t (00:08:31) allegro 17.2 P028 Windows SPB 64-bit Edition
+\t (00:08:31)     Journal start - Sun Nov 19 20:09:54 2017
+\t (00:08:31)         Host=THANHLE_PC User=thanhle Pid=10860 CPUs=8
+\t (00:08:31) CmdLine= C:\Cadence\SPB_17.2\tools\bin\allegro.exe
+\t (00:08:31) 
+\d (00:08:31) Design opened: F:/git/Cadence/modules/BinSensors/allegro/BINSENSORS.brd
+\i (00:08:31) generaledit 
+\i (00:08:32) zoom out 1 
+\i (00:08:32) setwindow pcb
+\i (00:08:32) zoom out 53.2968 33.7796
+\i (00:08:32) trapsize 2156
+\i (00:08:32) zoom out 1 
+\i (00:08:32) setwindow pcb
+\i (00:08:32) zoom out 53.2968 33.7797
+\t (00:08:32) Grids are drawn 0.6000, 0.6000 apart for enhanced viewability.
+\i (00:08:32) trapsize 4312
+\i (00:08:33) zoom in 1 
+\i (00:08:33) setwindow pcb
+\i (00:08:33) zoom in 43.6371 32.8309
+\i (00:08:33) trapsize 2156
+\i (00:08:33) zoom in 1 
+\i (00:08:33) setwindow pcb
+\i (00:08:33) zoom in 41.9553 32.5290
+\i (00:08:33) trapsize 1078
+\i (00:08:33) zoom out 1 
+\i (00:08:33) setwindow pcb
+\i (00:08:33) zoom out 41.9554 32.5290
+\i (00:08:33) trapsize 2156
+\i (00:08:36) 3d_viewer 
+\i (00:08:36) trapsize 2156
+\i (00:08:36) generaledit 
+\i (00:08:42) 3d_viewer 
+\i (00:08:42) trapsize 2156
+\i (00:08:42) generaledit 
+\i (00:08:50) zoom out 1 
+\i (00:08:51) setwindow pcb
+\i (00:08:51) zoom out 44.5859 29.9847
+\i (00:08:51) trapsize 4312
+\i (00:08:51) zoom in 1 
+\i (00:08:51) setwindow pcb
+\i (00:08:51) zoom in 1.5484 24.0337
+\i (00:08:51) trapsize 2156
+\i (00:08:52) zoom out 1 
+\i (00:08:52) setwindow pcb
+\i (00:08:52) zoom out 35.6593 35.9790
+\i (00:08:52) trapsize 4312
+\i (00:08:53) zoom in 1 
+\i (00:08:53) setwindow pcb
+\i (00:08:53) zoom in 36.0042 48.5710
+\i (00:08:53) trapsize 2156
+\i (00:08:53) zoom in 1 
+\i (00:08:53) setwindow pcb
+\i (00:08:53) zoom in 36.3924 49.0885
+\i (00:08:53) trapsize 1078
+\i (00:08:54) zoom out 1 
+\i (00:08:54) setwindow pcb
+\i (00:08:54) zoom out 36.3924 49.1101
+\i (00:08:54) trapsize 2156
+\i (00:09:01) zoom in 
+\i (00:09:01) setwindow pcb
+\i (00:09:01) zoom in 42.6453 47.8594
+\i (00:09:01) trapsize 1078
+\i (00:09:03) zoom out 1 
+\i (00:09:03) setwindow pcb
+\i (00:09:03) zoom out 42.6238 47.7301
+\i (00:09:03) trapsize 2156
+\i (00:09:03) zoom out 1 
+\i (00:09:03) setwindow pcb
+\i (00:09:03) zoom out 42.6238 47.6007
+\i (00:09:03) trapsize 4312
+\i (00:09:03) zoom out 1 
+\i (00:09:03) setwindow pcb
+\i (00:09:03) zoom out 42.6238 47.6008
+\t (00:09:03) Grids are drawn 1.2000, 1.2000 apart for enhanced viewability.
+\i (00:09:03) trapsize 8625
+\i (00:09:03) zoom out 1 
+\i (00:09:03) setwindow pcb
+\i (00:09:03) zoom out 30.4529 -9.6675
+\i (00:09:03) trapsize 14738
+\i (00:09:18) zoom in 1 
+\i (00:09:18) setwindow pcb
+\i (00:09:18) zoom in 43.4783 -5.1584
+\t (00:09:18) Grids are drawn 0.6000, 0.6000 apart for enhanced viewability.
+\i (00:09:18) trapsize 7369
+\i (00:09:18) zoom in 1 
+\i (00:09:18) setwindow pcb
+\i (00:09:18) zoom in -28.4451 14.8858
+\i (00:09:18) trapsize 3685
+\i (00:09:18) zoom in 1 
+\i (00:09:18) setwindow pcb
+\i (00:09:18) zoom in -1.4001 28.3714
+\i (00:09:18) trapsize 1842
+\i (00:09:19) zoom in 1 
+\i (00:09:19) setwindow pcb
+\i (00:09:19) zoom in 11.5329 27.6714
+\i (00:09:19) trapsize 921
+\i (00:09:19) roam start
+\i (00:09:19) roam x -112
+\i (00:09:19) roam y 64
+\i (00:09:19) roam end
+\i (00:09:19) zoom out 1 
+\i (00:09:19) setwindow pcb
+\i (00:09:19) zoom out 9.7275 25.1291
+\i (00:09:19) trapsize 1842
+\i (00:09:20) zoom out 1 
+\i (00:09:20) setwindow pcb
+\i (00:09:20) zoom out 9.1011 25.5345
+\i (00:09:20) trapsize 3685
+\i (00:09:20) zoom in 1 
+\i (00:09:20) setwindow pcb
+\i (00:09:20) zoom in 47.3473 38.0621
+\i (00:09:20) trapsize 1842
+\i (00:09:20) zoom in 1 
+\i (00:09:20) setwindow pcb
+\i (00:09:20) zoom in 52.2110 42.7415
+\i (00:09:21) trapsize 921
+\i (00:09:21) zoom out 1 
+\i (00:09:21) setwindow pcb
+\i (00:09:21) zoom out 52.1373 42.7231
+\i (00:09:21) trapsize 1842
+\i (00:09:21) zoom out 1 
+\i (00:09:21) setwindow pcb
+\i (00:09:21) zoom out 50.1476 42.0599
+\i (00:09:21) trapsize 3685
+\i (00:09:24) zoom fit 
+\i (00:09:24) trapsize 1288
+\i (00:10:53) open 
+\i (00:11:03) fillin "F:\git\Cadence\modules\BoardApTrung\allegro\MAYAPTRUNG.brd"
+\i (00:11:03) cd "F:\git\Cadence\modules\BoardApTrung\allegro"
+\t (00:11:03) Opening existing design...
+\t (00:11:03) Grids are drawn 0.4000, 0.4000 apart for enhanced viewability.
+\i (00:11:03) trapsize 4602
+\t (00:11:03)     Journal end - Sun Nov 19 20:12:26 2017

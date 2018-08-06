@@ -1,0 +1,329 @@
+#****************************************************************************
+#
+#  Copyright (c) 2001-2012
+#  Sigma Designs, Inc.
+#  All Rights Reserved
+#
+#----------------------------------------------------------------------------
+#
+#  Description: Common make file for all ZW030x/ZW020x Z-Wave applications
+#               This make file conatins all the rules that create the build directory.
+#               And compile the c files or aseemble the .a51 files.
+#               It also conatins the compiler and assempler options.
+#  Author:   Samer Seoud
+#
+#  Last Changed By:  $Author: jsi $
+#  Revision:         $Revision: 24742 $
+#  Last Changed:     $Date: 2013-03-01 14:53:18 +0100 (fr, 01 mar 2013) $
+#
+#****************************************************************************
+
+##########################
+# Keil Program names     #
+##########################
+ifneq ($(KEIL_LOCAL_PATH),)
+KEILPATH=$(KEIL_LOCAL_PATH)
+endif
+
+ifeq ($(SW_PGM),)
+SW_PGM=$(sw_pgm)
+endif
+ifeq ($(TOOLSDIR),)
+TOOLSDIR=$(toolsdir)
+endif
+ifeq ($(KEILPATH),)
+KEILPATH=$(keilpath)
+endif
+ifeq ($(TOOLDIR),)
+TOOLDIR=$(tooldir)
+endif
+
+# The command to make dependencies from the headerfiles
+# included by a file.
+MAKEDEPEND=$(subst \,\\,$(TOOLSDIR)\IncDep\makedepend.exe)
+
+# The command to edit text strings in a stream
+SED=$(subst \,\\,$(TOOLSDIR)\texttools\sed-4-1-5\sed.exe)
+
+CC=$(subst \,\\,$(KEILPATH)\bin\C51)
+LN=$(subst \,\\,$(KEILPATH)\bin\LX51)
+HEX=$(subst \,\\,$(KEILPATH)\bin\OHX51)
+LIB=$(subst \,\\,$(KEILPATH)\bin\LIBX51)
+ASM=$(subst \,\\,$(KEILPATH)\bin\AX51)
+
+# Utility location
+ifeq ($(ZWUTILDIR),)
+ZWUTILDIR:=..\util_func
+endif
+
+# The command to make dependencies from the headerfiles
+# included by a file.
+INCDEP=python $(subst \,\\,$(TOOLSDIR)\IncDep\incdep.py)
+
+###############
+# Directories #
+###############
+# Find the current directory used as a base for all other paths.
+BASEDIR:=.
+BASEDIRFULL:=$(shell cd)
+
+TARGETBASEDIR:=$(BASEDIR)\build
+TARGETBASEDIRFULL:=$(BASEDIRFULL)\build
+
+# Some applications still does not set TARGETBUILDDIR. Just to be safe.
+ifeq ($(TARGETBUILDDIR),)
+TARGETBUILDDIR:=$(TARGET)
+endif
+
+TARGETDIR:=$(TARGETBASEDIR)\$(TARGETBUILDDIR)
+TARGETDIRFULL:=$(TARGETBASEDIRFULL)\$(TARGETBUILDDIR)
+
+RELSDIR:=$(TARGETDIR)\Rels
+RELSDIRFULL:=$(TARGETDIRFULL)\Rels
+
+LISTDIR:=$(TARGETDIR)\list
+LISTDIRFULL:=$(TARGETDIRFULL)\list
+
+# Export the variables declared above to the other makefiles.
+export BASEDIR INCDEP
+
+ifeq ($(C51INC),)
+C51INC:=$(KEILPATH)\inc,$(ZWLIBROOT)\include,$(TARGETDIR)\Rels,$(ZWUTILDIR)
+else
+C51INC+=,$(KEILPATH)\inc,$(ZWLIBROOT)\include,$(TARGETDIR)\Rels,$(ZWUTILDIR)
+endif
+C51LIB=$(KEILPATH)\\lib
+ifeq ($(A51INC),)
+A51INC:=$(KEILPATH)\inc;$(ZWLIBROOT)\include;$(TARGETDIR)\Rels
+else
+A51INC+=;$(KEILPATH)\inc;$(ZWLIBROOT)\include;$(TARGETDIR)\Rels
+endif
+
+######################
+# (flags and defines #
+######################
+## Check if we are using extended CX51 compiler if so then we need to define __C51__
+ifeq ($(findstring "CX51","$(CC)"),"CX51")
+ifeq ($(CDEFINES),)
+CDEFINES=__C51__,
+else
+CDEFINES+=__C51__,
+endif
+endif
+
+ifeq ($(ADEFINES),)
+ADEFINES=
+else
+ADEFINES+=
+endif
+
+#----- Chip memory layout specifications for the ZW020x and ZW030x -----
+
+ifneq ($(BOOTLOADER),)
+# Memory classes specification for LFLAGS building bootloader application code:
+CLASSSPEC:=CLASSES(BIT(I:0X002F.2-0X002F.7),\
+                   DATA(D:0X006E-D:0X006F),\
+                   IDATA(I:0X00D8-I:0X00FF),\
+                   XDATA(X:0X04A5-X:0X07FF),\
+                   CODE(C:0X7000-C:0X7FFF),\
+                   CONST(C:0X7000-C:0X7FFF))
+else
+ifneq ($(BOOTLOADER_ENABLED),)
+# Memory classes specification for LFLAGS building bootloader enabled application code:
+CLASSSPEC:=CLASSES(BIT(I:0X0020.0-0X002F.7),\
+                   DATA(D:0X0010-D:0X001F,D:0X0030-D:0X007F),\
+                   IDATA(I:0X0070-D:0X00FF),\
+                   XDATA(X:0X0000-X:0X07FF),\
+                   CODE(C:0X0000-C:0X7FFF),\
+                   CONST(C:0X0000-C:0X7FFF))
+else
+# Memory classes specification for LFLAGS building normal application code:
+CLASSSPEC:=CLASSES(BIT(I:0X0020.0-0X002F.7),\
+                   DATA(D:0X0000-D:0X007F),\
+                   IDATA(I:0X0000-D:0X00FF),\
+                   XDATA(X:0X0000-X:0X07E7),\
+                   CODE(C:0X0000-C:0X7FFF),\
+                   CONST(C:0X0000-C:0X7FFF))
+endif
+endif
+
+ifeq ($(DONTUSERFC),)
+RFTABLELOC=?CO?ZW_RF020X_FTBL (C:0X7F80)
+endif
+
+ifneq ($(BOOTLOADER_ENABLED),)
+FIRMWAREDESCRIPTORLOC=?CO?FIRMWAREDESCRIPTOR (LAST)
+endif
+
+#----- Build segment specification for fixed address segments for LFLAGS
+# Any fixed segments to specify ?
+ifneq ($(RFTABLELOC)$(FIRMWAREDESCRIPTORLOC),)
+# Begin segment specification with "SEGMENTS("
+SEGMENTSPEC:=SEGMENTS(
+# Any RF setup table to locate at a fixed address ?
+ifneq ($(RFTABLELOC),)
+# Do we need a comma-separator here ? Not if this is first segment locator.
+ifneq "$(SEGMENTSPEC)" "SEGMENTS("
+SEGMENTSPEC:=$(SEGMENTSPEC),
+endif
+SEGMENTSPEC:=$(SEGMENTSPEC)$(RFTABLELOC)
+endif
+ifneq ($(FIRMWAREDESCRIPTORLOC),)
+# Do we need a comma-separator here ? Not if this is first segment locator.
+ifneq "$(SEGMENTSPEC)" "SEGMENTS("
+SEGMENTSPEC:=$(SEGMENTSPEC),
+endif
+SEGMENTSPEC:=$(SEGMENTSPEC)$(FIRMWAREDESCRIPTORLOC)
+endif
+# End segment specification with ")"
+SEGMENTSPEC:=$(SEGMENTSPEC))
+endif
+
+CFLAGS=WL (1) DB OA OE LA CD SB LC NOIP NOCO OT(11,SIZE) ID($(C51INC)) CODE SYMBOLS
+
+ifeq ($(AOFFILE),)
+LFLAGS=NOOVERLAY DW (13, 16, 25) IXREF PRINT($(RELSDIR)\$(TARGET).map) $(CLASSSPEC) $(SEGMENTSPEC)
+else
+LFLAGS=NOOVERLAY MERGEPUBLICS DW (13, 16, 25) IXREF PRINT($(RELSDIR)\$(TARGET).map) $(CLASSSPEC) $(SEGMENTSPEC)
+endif
+
+AFLAGS=ID($(A51INC)) NORB XR
+
+###################################
+# Where to look for prerequisites #
+###################################
+VPATH:=$(VPATH):$(ZWLIBROOT)\include:$(RELSDIR):$(TARGETDIR):$(KEILPATH)\inc:$(ZWUTILDIR)
+
+#########
+# Rules #
+#########
+
+# When the rule supplies a source for the compilation (in the pseudo-variable $<)
+# it will sometimes (when the source is found in VPATH) the last directory separator
+# will be a /. By using the variable defined below instead of $< all directory separators
+# will be correct.
+RULESRC=$(subst /,\,$<)
+
+# The "subst" command found in most of the rules escapes the
+# backslases found in MS-DOS paths, by replacing all backspaces
+# by two backspaces. If this isn't done the backspaces would result
+# in controlcodes and not directory separators.
+
+# In the rules a "$<" refers to the right side of the rule (ie. the sourcefile)
+# and a "$@" refers to the left side (ie. the destination file).
+
+# Deletes all generated files (relocatables, downloadables,
+# dependency files and the generated C and headerfiles from ZUIB)
+clean:
+ifeq ($(OS), Windows_NT)
+	@cmd /c "rd build /s /q"
+else
+	@deltree /Y $(subst \,\\,build)
+endif
+
+# How to compile C source files (two rules in case that some of the files has
+# a capital C extension....)
+ifeq ($(EFH_PATCH_ENABLE), 1)
+
+%.obj : %.c
+	@echo Compiling $(RULESRC)
+	@echo $(RULESRC) $(CFLAGS) >cmdfile
+	@echo DF($(CDEFINES)) >>cmdfile
+	@echo PR($(LISTDIR)\$(subst .obj,.lst,$@)) >>cmdfile
+#	@echo OJ($(RELSDIR)\$@) >>cmdfile
+	@echo SRC($(RELSDIR)\$(subst .obj,.src,$@)) >>cmdfile
+	@$(CC) @cmdfile
+	@del cmdfile
+	@echo Assembling $(RELSDIR)\$(subst .obj,.src,$@)
+	@echo $(RELSDIR)\$(subst .obj,.src,$@) >cmdfile
+	@echo $(AFLAGS) >>cmdfile
+	@echo OJ($(RELSDIR)\$@) >>cmdfile
+	@echo PR($(LISTDIR)\$(@:.obj=.lis))>>cmdfile
+	@$(ASM) @cmdfile
+	@del cmdfile
+
+%.obj : %.C
+	@echo Compiling $(RULESRC)
+	@echo $(RULESRC) $(CFLAGS) >cmdfile
+	@echo DF($(CDEFINES)) >>cmdfile
+	@echo PR($(LISTDIR)\$(subst .obj,.lst,$@)) >>cmdfile
+#	@echo OJ($(RELSDIR)\$@) >>cmdfile
+	@echo SRC($(RELSDIR)\$(subst .obj,.src,$@)) >>cmdfile
+	@$(CC) @cmdfile
+	@del cmdfile
+	@echo Assembling $(RELSDIR)\$(subst .obj,.src,$@)
+	@echo $(RELSDIR)\$(subst .obj,.src,$@) >cmdfile
+	@echo $(AFLAGS) >>cmdfile
+	@echo OJ($(RELSDIR)\$@) >>cmdfile
+	@echo PR($(LISTDIR)\$(@:.obj=.lis))>>cmdfile
+	@$(ASM) @cmdfile
+	@del cmdfile
+
+else
+
+%.obj : %.c
+	@echo Compiling $(RULESRC)
+	@echo $(RULESRC) $(CFLAGS) >cmdfile
+	@echo DF($(CDEFINES)) >>cmdfile
+	@echo PR($(LISTDIR)\$(subst .obj,.lst,$@)) >>cmdfile
+	@echo OJ($(RELSDIR)\$@) >>cmdfile
+	@$(CC) @cmdfile
+	@del cmdfile
+
+%.obj : %.C
+	@echo Compiling $(RULESRC)
+	@echo $(RULESRC) $(CFLAGS) >cmdfile
+	@echo DF($(CDEFINES)) >>cmdfile
+	@echo PR($(LISTDIR)\$(subst .obj,.lst,$@)) >>cmdfile
+	@echo OJ($(RELSDIR)\$@) >>cmdfile
+	@$(CC) @cmdfile
+	@del cmdfile
+
+endif
+
+# How to assemble assembler source files
+%.obj : %.a51
+	@echo Assembling $(RULESRC)
+	@echo $(RULESRC) >cmdfile
+	@echo DF($(ADEFINES)) >>cmdfile
+	@echo $(AFLAGS) >>cmdfile
+	@echo OJ($(RELSDIR)\$@) >>cmdfile
+	@echo PR($(LISTDIR)\$(@:.obj=.lst)) >>cmdfile
+	@$(ASM) @cmdfile
+	@del cmdfile
+
+# How to generate the dependency files from the C and assembler source files.
+%.d : %.c $(RELSDIR) $(LISTDIR)
+	@$(INCDEP) $(subst \,\\,$(RULESRC)) $(subst \,\\,$(RELSDIR)\$(@:.d=.obj)) $(subst \,\\,$(RELSDIRFULL)\$@)
+
+%.d : %.C $(RELSDIR) $(LISTDIR)
+	@$(INCDEP) $(subst \,\\,$(RULESRC)) $(subst \,\\,$(RELSDIR)\$(@:.d=.obj)) $(subst \,\\,$(RELSDIRFULL)\$@)
+
+%.d : %.a51 $(RELSDIR) $(LISTDIR)
+	@$(INCDEP) $(subst \,\\,$(RULESRC)) $(subst \,\\,$(RELSDIR)\$(@:.d=.obj)) $(subst \,\\,$(RELSDIRFULL)\$@)
+
+# How to generate the files with full path of the C and assembler source files found by MAKE, and in use.
+%.csrc: %.c
+	@echo $(RULESRC)> $(subst \,\\,$(RELSDIRFULL)\$@)
+
+%.csrc: %.C
+	@echo $(RULESRC)> $(subst \,\\,$(RELSDIRFULL)\$@)
+
+%.csrc: %.a51
+	@echo $(RULESRC)> $(subst \,\\,$(RELSDIRFULL)\$@)
+
+
+$(TARGETBASEDIR):
+	@if not exist $(TARGETBASEDIR)\NUL mkdir $(TARGETBASEDIR) > NUL
+
+$(RELSDIR): $(TARGETDIR)
+	@if not exist $(RELSDIR)\NUL mkdir $(RELSDIR) >NUL
+
+$(LISTDIR): $(TARGETDIR)
+	@if not exist $(LISTDIR)\NUL mkdir $(LISTDIR) >NUL
+
+$(TARGETDIR) : $(TARGETBASEDIR)
+	@if not exist $(TARGETDIR)\NUL mkdir $(TARGETDIR) >NUL
+
+.PHONY: dirs clean depend all default check Makefile.Testdefines
+

@@ -1,0 +1,83 @@
+#**********************  Makefile.binsensor_common  ************************
+#            #######
+#            ##  ##
+#            #  ##    ####   #####    #####  ##  ##   #####
+#              ##    ##  ##  ##  ##  ##      ##  ##  ##
+#             ##  #  ######  ##  ##   ####   ##  ##   ####
+#            ##  ##  ##      ##  ##      ##   #####      ##
+#           #######   ####   ##  ##  #####       ##  #####
+#                                            #####
+#           Z-Wave, the wireless language.
+#
+#               Copyright (c) 2001
+#               Zensys A/S
+#               Denmark
+#
+#               All Rights Reserved
+#
+#     This source file is subject to the terms and conditions of the
+#     Zensys Software License Agreement which restricts the manner
+#     in which it may be used.
+#
+#---------------------------------------------------------------------------
+#
+#  Description: Common makefile for battery binsensor of all types
+#
+#  Author:   Johann Sigfredsson
+#
+#  Last Changed By:  $Author: efh $
+#  Revision:         $Revision: 21355 $
+#  Last Changed:     $Date: 2011-09-23 14:05:51 +0200 (fr, 23 sep 2011) $
+#
+#****************************************************************************
+
+# Target name
+ifneq ($(SCHEME),)
+SEC=_$(SCHEME)
+endif
+
+ifeq ($(SENSOR_TYPE), BATTERY)
+TARGET:=Bin_Sensor_Battery$(SLTYPE)_$(CHIP)_$(COUNTRY)$(TEST)$(SEC)
+else
+TARGET:=Bin_Sensor$(SLTYPE)_$(CHIP)_$(COUNTRY)$(TEST)$(SEC)
+endif
+
+all: $(TARGET).hex
+
+include $(ZWLIBROOT)\Common\Makefile.common_ZW0x0x_appl
+
+RELFILES=Bin_Sensor.obj\
+	 slave_learn.obj\
+	 one_button.obj\
+	 battery.obj\
+	 self_heal.obj\
+	 association.obj\
+	 App_RFSetup.obj
+
+CDEFINES+=$(COUNTRY),\
+	        $(SENSOR_TYPE),\
+	        ZW_SELF_HEAL
+
+ADEFINES+=$(COUNTRY),\
+	        $(CHIP)
+
+#Test if we should build with security
+ifneq ($(SCHEME),)
+RELFILES+=	8051_AES_common.obj \
+	 		8051_AES_core.obj \
+	 		ZW_Security_AES_module.obj \
+	 		ZW_TransportSecurity.obj
+CDEFINES+=,	SECURITY=$(SCHEME), \
+			$(SCHEME)
+ADEFINES+=,	SECURITY=$(SCHEME), \
+			$(SCHEME)
+endif
+
+ifneq ($(TEST),)
+CDEFINES+=,TESTFREQ
+ADEFINES+=,TESTFREQ
+endif
+
+-include $(ZWLIBROOT)\Common\Makefile.common_ZW0x0x_understand
+
+include $(ZWLIBROOT)\Common\Makefile.common_ZW0x0x

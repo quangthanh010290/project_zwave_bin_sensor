@@ -1,0 +1,14 @@
+".\bin\slave_learn.obj",
+".\bin\self_heal.obj",
+".\bin\association.obj",
+".\bin\App_RFSetup.obj",
+".\bin\Switch3.obj",
+".\bin\MyButtons.obj",
+"..\..\Z-Wave\rf_freq\ZW_rf_030x_US.obj",
+"..\..\Z-Wave\lib\slave_enhanced_ZW030x\zw_slave_enhanced_ZW030xs.lib" 
+TO ".\bin\/3buttons_ZW030x_US" 
+
+PRINT(".\build_prj\Bin_Sensor_ZW030x_US\list\/3buttons_ZW030x_US.map") DW (13,16,25) NOOL CLASSES(IDATA(D:0-D:0xff),XDATA(X:0-X:0x7ff),CODE(C:0-C:0x7fff))
+SEGMENTS(?CO?ZW_RF020X_FTBL (C:0X7F80)) 
+CLASSES (CODE (C:0x0-C:0x7FFF), CONST (C:0x0-C:0x7FFF), 
+ECODE (C:0x0-C:0x7FFF), HCONST (C:0x0-C:0x7FFF)) 

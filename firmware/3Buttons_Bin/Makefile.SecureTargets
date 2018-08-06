@@ -1,0 +1,281 @@
+##************************ Makefile.SecureTargets **************************
+##           #######
+##           ##  ##
+##           #  ##    ####   #####    #####  ##  ##   #####
+##             ##    ##  ##  ##  ##  ##      ##  ##  ##
+##            ##  #  ######  ##  ##   ####   ##  ##   ####
+##           ##  ##  ##      ##  ##      ##   #####      ##
+##          #######   ####   ##  ##  #####       ##  #####
+##                                           #####
+##          Z-Wave, the wireless language.
+##
+##              Copyright (c) 2001
+##              Zensys A/S
+##              Denmark
+##
+##              All Rights Reserved
+##
+##    This source file is subject to the terms and conditions of the
+##    Zensys Software License Agreement which restricts the manner
+##    in which it may be used.
+##
+##---------------------------------------------------------------------------
+##
+## Description:
+##    Makefile for the ZW0x0x development kit binary battery sensor
+##    This makefile defines the targets built
+##
+## Author:   Erik Friis Harck
+##
+## Last Changed By:  $Author: efh $
+## Revision:         $Revision: 21375 $
+## Last Changed:     $Date: 2011-09-26 12:46:28 +0200 (ma, 26 sep 2011) $
+##
+##***************************************************************************/
+
+BDIRS=build
+
+# Standard make names
+ZW020x:\
+ ZW020x_SCHEME_0
+
+ZW030x:\
+ ZW030x_SCHEME_0
+
+ZW0x0x:\
+ ZW0x0x_SCHEME_0
+
+ZW0x0x_SCHEME_0: Bin_Sensor_ZW0x0x_SCHEME_0 Bin_Sensor_Battery_ZW0x0x_SCHEME_0
+ZW020x_SCHEME_0: Bin_Sensor_ZW020x_SCHEME_0 Bin_Sensor_Battery_ZW020x_SCHEME_0
+ZW030x_SCHEME_0: Bin_Sensor_ZW030x_SCHEME_0 Bin_Sensor_Battery_ZW030x_SCHEME_0
+
+ZW020x_EU_SCHEME_0:  Bin_Sensor_ZW020x_EU_SCHEME_0
+ZW020x_US_SCHEME_0:  Bin_Sensor_ZW020x_US_SCHEME_0
+ZW020x_ANZ_SCHEME_0: Bin_Sensor_ZW020x_ANZ_SCHEME_0
+ZW020x_HK_SCHEME_0:  Bin_Sensor_ZW020x_HK_SCHEME_0
+ZW020x_MY_SCHEME_0:  Bin_Sensor_ZW020x_MY_SCHEME_0
+ZW020x_IN_SCHEME_0:  Bin_Sensor_ZW020x_IN_SCHEME_0
+ZW020x_RU_SCHEME_0:  Bin_Sensor_ZW020x_RU_SCHEME_0
+ZW020x_IL_SCHEME_0:  Bin_Sensor_ZW020x_IL_SCHEME_0
+ZW030x_EU_SCHEME_0:  Bin_Sensor_ZW030x_EU_SCHEME_0
+ZW030x_US_SCHEME_0:  Bin_Sensor_ZW030x_US_SCHEME_0
+ZW030x_ANZ_SCHEME_0: Bin_Sensor_ZW030x_ANZ_SCHEME_0
+ZW030x_HK_SCHEME_0:  Bin_Sensor_ZW030x_HK_SCHEME_0
+ZW030x_MY_SCHEME_0:  Bin_Sensor_ZW030x_MY_SCHEME_0
+ZW030x_IN_SCHEME_0:  Bin_Sensor_ZW030x_IN_SCHEME_0
+ZW030x_RU_SCHEME_0:  Bin_Sensor_ZW030x_RU_SCHEME_0
+ZW030x_IL_SCHEME_0:  Bin_Sensor_ZW030x_IL_SCHEME_0
+
+
+# Common secure targets
+Bin_Sensor_ZW0x0x_SCHEME_0: Bin_Sensor_ZW020x_SCHEME_0 Bin_Sensor_ZW030x_SCHEME_0
+Bin_Sensor_Battery_ZW0x0x_SCHEME_0: Bin_Sensor_Battery_ZW020x_SCHEME_0 Bin_Sensor_Battery_ZW030x_SCHEME_0
+
+# ZW020x secure targets
+Bin_Sensor_ZW020x_SCHEME_0: Bin_Sensor_ZW020x_EU_SCHEME_0 Bin_Sensor_ZW020x_US_SCHEME_0 Bin_Sensor_ZW020x_ANZ_SCHEME_0 Bin_Sensor_ZW020x_HK_SCHEME_0 Bin_Sensor_ZW020x_MY_SCHEME_0 Bin_Sensor_ZW020x_IN_SCHEME_0 Bin_Sensor_ZW020x_RU_SCHEME_0 Bin_Sensor_ZW020x_IL_SCHEME_0
+Bin_Sensor_Battery_ZW020x_SCHEME_0: Bin_Sensor_Battery_ZW020x_EU_SCHEME_0 Bin_Sensor_Battery_ZW020x_US_SCHEME_0 Bin_Sensor_Battery_ZW020x_ANZ_SCHEME_0 Bin_Sensor_Battery_ZW020x_HK_SCHEME_0 Bin_Sensor_Battery_ZW020x_MY_SCHEME_0 Bin_Sensor_Battery_ZW020x_IN_SCHEME_0 Bin_Sensor_Battery_ZW020x_RU_SCHEME_0 Bin_Sensor_Battery_ZW020x_IL_SCHEME_0
+
+# ZW030x secure targets
+Bin_Sensor_ZW030x_SCHEME_0: Bin_Sensor_ZW030x_EU_SCHEME_0 Bin_Sensor_ZW030x_US_SCHEME_0 Bin_Sensor_ZW030x_ANZ_SCHEME_0 Bin_Sensor_ZW030x_HK_SCHEME_0 Bin_Sensor_ZW030x_MY_SCHEME_0 Bin_Sensor_ZW030x_IN_SCHEME_0 Bin_Sensor_ZW030x_RU_SCHEME_0 Bin_Sensor_ZW030x_IL_SCHEME_0
+Bin_Sensor_Battery_ZW030x_SCHEME_0: Bin_Sensor_Battery_ZW030x_EU_SCHEME_0 Bin_Sensor_Battery_ZW030x_US_SCHEME_0 Bin_Sensor_Battery_ZW030x_ANZ_SCHEME_0 Bin_Sensor_Battery_ZW030x_HK_SCHEME_0 Bin_Sensor_Battery_ZW030x_MY_SCHEME_0 Bin_Sensor_Battery_ZW030x_IN_SCHEME_0 Bin_Sensor_Battery_ZW030x_RU_SCHEME_0 Bin_Sensor_Battery_ZW030x_IL_SCHEME_0
+
+##***************************************************************************/
+# Include test targets (if any)
+-include Makefile.SecureTestTargets
+
+#################################################
+# ZW020x secure target makefiles
+
+Bin_Sensor_ZW020x_EU_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=EU RF=EU SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW020x_EU_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_ZW020x_US_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=US RF=US SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW020x_US_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW020x_EU_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=EU RF=EU SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW020x_EU_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW020x_US_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=US RF=US SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW020x_US_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_ZW020x_ANZ_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=ANZ RF=ANZ SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW020x_ANZ_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_ZW020x_HK_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=HK RF=HK SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW020x_HK_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW020x_ANZ_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=ANZ RF=ANZ SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW020x_ANZ_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW020x_HK_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=HK RF=HK SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW020x_HK_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_ZW020x_MY_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=MY RF=MY SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW020x_MY_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW020x_MY_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=MY RF=MY SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW020x_MY_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_ZW020x_IN_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=IN RF=IN SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW020x_IN_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW020x_IN_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=IN RF=IN SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW020x_IN_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_ZW020x_RU_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=RU RF=RU SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW020x_RU_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_ZW020x_IL_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=IL RF=IL SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW020x_IL_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW020x_RU_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=RU RF=RU SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW020x_RU_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW020x_IL_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW020x COUNTRY=IL RF=IL SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW020x_IL_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+# ZW030x secure target makefiles
+
+Bin_Sensor_ZW030x_EU_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=EU RF=EU SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW030x_EU_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_ZW030x_US_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=US RF=US SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW030x_US_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW030x_EU_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=EU RF=EU SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW030x_EU_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW030x_US_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=US RF=US SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW030x_US_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_ZW030x_ANZ_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=ANZ RF=ANZ SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW030x_ANZ_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_ZW030x_HK_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=HK RF=HK SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW030x_HK_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW030x_ANZ_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=ANZ RF=ANZ SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW030x_ANZ_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW030x_HK_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=HK RF=HK SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW030x_HK_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_ZW030x_MY_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=MY RF=MY SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW030x_MY_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW030x_MY_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=MY RF=MY SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW030x_MY_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_ZW030x_IN_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=IN RF=IN SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW030x_IN_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW030x_IN_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=IN RF=IN SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW030x_IN_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_ZW030x_RU_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=RU RF=RU SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW030x_RU_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_ZW030x_IL_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=IL RF=IL SENSOR_TYPE=NON_BATT SCHEME=SCHEME_0
+Bin_Sensor_ZW030x_IL_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW030x_RU_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=RU RF=RU SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW030x_RU_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+Bin_Sensor_Battery_ZW030x_IL_SCHEME_0:MAKELINE=LIB:=slave_enhanced CHIP=ZW030x COUNTRY=IL RF=IL SENSOR_TYPE=BATTERY SCHEME=SCHEME_0
+Bin_Sensor_Battery_ZW030x_IL_SCHEME_0:
+	$(MAKE) depend $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+	$(MAKE) $(MAKEOPTS) . $(MAKELINE) -f Makefile.binsensor_common
+
+# All targets that shouldn't result in a file/directory
+# with the same name as the target should be listed here.
+# Otherwise the above rule will make a directory with
+# the targetname
+.PHONY:\
+ Makefile.SecureTestTargets\
+ ZW0x0x_SCHEME_0\
+ ZW020x_SCHEME_0\
+ ZW030x_SCHEME_0\
+ ZW020x_EU_SCHEME_0\
+ ZW020x_US_SCHEME_0\
+ ZW020x_ANZ_SCHEME_0\
+ ZW020x_HK_SCHEME_0\
+ ZW020x_MY_SCHEME_0\
+ ZW020x_IN_SCHEME_0\
+ ZW020x_RU_SCHEME_0\
+ ZW020x_IL_SCHEME_0\
+ ZW030x_EU_SCHEME_0\
+ ZW030x_US_SCHEME_0\
+ ZW030x_ANZ_SCHEME_0\
+ ZW030x_HK_SCHEME_0\
+ ZW030x_MY_SCHEME_0\
+ ZW030x_IN_SCHEME_0\
+ ZW030x_RU_SCHEME_0\
+ ZW030x_IL_SCHEME_0\
+ Bin_Sensor_ZW030x_SCHEME_0\
+ Bin_Sensor_ZW020x_SCHEME_0\
+ Bin_Sensor_ZW0x0x_SCHEME_0\
+ Bin_Sensor_Battery_ZW030x_SCHEME_0\
+ Bin_Sensor_Battery_ZW020x_SCHEME_0\
+ Bin_Sensor_Battery_ZW0x0x_SCHEME_0

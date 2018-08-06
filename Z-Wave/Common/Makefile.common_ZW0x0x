@@ -1,0 +1,422 @@
+#****************************************************************************
+#
+#  Copyright (c) 2001-2012
+#  Sigma Designs, Inc.
+#  All Rights Reserved
+#
+#----------------------------------------------------------------------------
+#
+#  Description: Common make file for all ZW0x0x applications
+#
+#  Author:   Samer Seoud
+#
+#  Last Changed By:  $Author: efh $
+#  Revision:         $Revision: 24959 $
+#  Last Changed:     $Date: 2013-03-11 12:41:24 +0100 (ma, 11 mar 2013) $
+#
+#****************************************************************************
+
+
+###############
+# Directories #
+###############
+VPATH:=$(VPATH):$(ZWLIBROOT)\\IO_defines
+C51INC+=,$(ZWLIBROOT)\IO_defines
+FIXBOOTCRC:=$(TOOLSDIR)\\fixbootcrc\\fixbootcrc.exe
+SREC=$(subst \,\\,$(TOOLSDIR)\HexTools\srec_cat.exe)
+
+ifeq ($(CHIP),ZW020x)
+CHIPFULL=ZW0201
+CHIPNUMBER=020x
+endif
+ifeq ($(CHIP),ZW030x)
+CHIPFULL=ZW0301
+CHIPNUMBER=030x
+endif
+
+ifneq "$(LIB)" "nolib"
+# Z-Wave library file
+LIBFILE=$(ZWLIBROOT)\lib\$(LIB)$(DUT_NAME)_$(CHIP)$(CH3_NAME)$(PATCH_LIB)\ZW_$(LIB)$(DUT_NAME)_$(CHIP)$(CH3_NAME)$(PATCH_LIB)s.lib
+endif
+
+ifeq ($(DONTUSERFC),)
+RF_FREQ_FILE=$(ZWLIBROOT)\lib\rf_Freq\ZW_rf_$(CHIPNUMBER)_$(RF).obj
+endif
+
+#----------------------------------------------------------------------------
+####################
+# Compiler options #
+####################
+ifeq ($(CHIP),ZW020x)
+COMDEFINES:=\
+ $(CHIP),\
+ ZW0201_RFFIX
+endif
+
+ifeq ($(CHIP),ZW030x)
+COMDEFINES:=\
+ $(CHIP),\
+ ZW020x,\
+ ZW0201_RFFIX
+endif
+
+######################################################
+# Compiler options. Specific for the library in use. #
+######################################################
+
+ifeq "$(LIB)" "controller_portable"
+COMDEFINES:=ZW_CONTROLLER,\
+ ZW_ROUTING_CONTROL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "controller_bridge_nosuc_norep_noflirs"
+COMDEFINES:=ZW_CONTROLLER,\
+ ZW_CONTROLLER_STATIC,\
+ ZW_CONTROLLER_STATIC_NOSUC,\
+ ZW_CONTROLLER_BRIDGE,\
+ ZW_ROUTING_CONTROL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "controller_portable_noflirs"
+COMDEFINES:=ZW_CONTROLLER,\
+ ZW_ROUTING_CONTROL,\
+ ZW_NO_FLIRS,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "controller_static_norep_noflirs"
+COMDEFINES:=ZW_CONTROLLER,\
+ ZW_CONTROLLER_STATIC,\
+ ZW_ROUTING_CONTROL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "controller_static_norep_noflirs_nomr"
+COMDEFINES:=ZW_CONTROLLER,\
+ ZW_CONTROLLER_STATIC,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "controller_static_norep_noflirs_single"
+COMDEFINES:=ZW_CONTROLLER,\
+ ZW_CONTROLLER_STATIC,\
+ ZW_CONTROLLER_SINGLE,\
+ ZW_ROUTING_CONTROL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "controller_static_norep_noflirs_single"
+COMDEFINES:=ZW_CONTROLLER,\
+ ZW_CONTROLLER_STATIC,\
+ ZW_CONTROLLER_SINGLE,\
+ ZW_ROUTING_CONTROL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "controller_static_nosuc_noflirs"
+COMDEFINES:=ZW_CONTROLLER,\
+ ZW_CONTROLLER_STATIC,\
+ ZW_CONTROLLER_STATIC_NOSUC,\
+ ZW_ROUTING_CONTROL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "controller_static_nosuc_norep"
+COMDEFINES:=ZW_CONTROLLER,\
+ ZW_CONTROLLER_STATIC,\
+ ZW_CONTROLLER_STATIC_NOSUC,\
+ ZW_ROUTING_CONTROL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "controller_static_nosuc_norep_nomr"
+COMDEFINES:=ZW_CONTROLLER,\
+	    ZW_CONTROLLER_STATIC,\
+	    ZW_CONTROLLER_STATIC_NOSUC,\
+	    $(CHIP)
+endif
+
+ifeq "$(CHIP)" "ZW030x"
+ifeq "$(LIB)" "controller_static_nosuc_norep_pa"
+COMDEFINES:=ZW_CONTROLLER,\
+ ZW_CONTROLLER_STATIC,\
+ ZW_CONTROLLER_STATIC_NOSUC,\
+ ZW_ROUTING_CONTROL,\
+ APP_RF_NOTIFY,\
+ $(CHIP)
+endif
+endif
+
+ifeq "$(LIB)" "controller_static_single"
+COMDEFINES:=ZW_CONTROLLER,\
+ ZW_CONTROLLER_STATIC,\
+ ZW_CONTROLLER_SINGLE,\
+ ZW_ROUTING_CONTROL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "controller_installer"
+COMDEFINES:=ZW_CONTROLLER,\
+ ZW_INSTALLER,\
+ ZW_ROUTING_CONTROL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "controller_installer_noflirs"
+COMDEFINES:=ZW_CONTROLLER,\
+ ZW_INSTALLER,\
+ ZW_ROUTING_CONTROL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "controller_routing"
+COMDEFINES:=ZW_CONTROLLER,\
+ ZW_INSTALLER,\
+ ZW_ROUTING_DEMO,\
+ ZW_ROUTING_CONTROL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "slave"
+COMDEFINES:=ZW_SLAVE,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "slave_enhanced"
+COMDEFINES:=ZW_SLAVE,\
+ ZW_SLAVE_ROUTING,\
+ ZW_SLAVE_32,\
+ ZW_ROUTING_CONTROL,\
+ ZW_SELF_HEAL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "slave_enhanced_232"
+COMDEFINES:=ZW_SLAVE,\
+ ZW_SLAVE_ROUTING,\
+ ZW_SLAVE_32,\
+ ZW_SLAVE_RETURNROUTEDEST_232,\
+ ZW_ROUTING_CONTROL,\
+ ZW_SELF_HEAL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "slave_enhanced_232_noflirs_nomr"
+COMDEFINES:=ZW_SLAVE,\
+ ZW_SLAVE_ROUTING,\
+ ZW_SLAVE_32,\
+ ZW_SLAVE_RETURNROUTEDEST_232,\
+ ZW_SELF_HEAL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "slave_enhanced_232_noupdate"
+COMDEFINES:=ZW_SLAVE,\
+ ZW_SLAVE_ROUTING,\
+ ZW_SLAVE_32,\
+ ZW_SLAVE_RETURNROUTEDEST_232,\
+ ZW_ROUTING_CONTROL,\
+ ZW_SELF_HEAL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "slave_enhanced_noflirs_nomr"
+COMDEFINES:=ZW_SLAVE,\
+ ZW_SLAVE_ROUTING,\
+ ZW_SLAVE_32,\
+ ZW_SELF_HEAL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "slave_enhanced_noupdate"
+COMDEFINES:=ZW_SLAVE,\
+ ZW_SLAVE_ROUTING,\
+ ZW_SLAVE_32,\
+ ZW_ROUTING_CONTROL,\
+ ZW_SELF_HEAL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "slave_otp"
+COMDEFINES:=ZW_SLAVE,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "slave_prodtest_dut"
+COMDEFINES:=ZW_SLAVE,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "slave_prodtest_gen"
+COMDEFINES:=ZW_SLAVE,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "slave_routing"
+COMDEFINES:=ZW_SLAVE,\
+ ZW_SLAVE_ROUTING,\
+ ZW_ROUTING_CONTROL,\
+ ZW_SELF_HEAL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "slave_routing_noflirs_nomr"
+COMDEFINES:=ZW_SLAVE,\
+ ZW_SLAVE_ROUTING,\
+ ZW_SELF_HEAL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "slave_routing_noupdate"
+COMDEFINES:=ZW_SLAVE,\
+ ZW_SLAVE_ROUTING,\
+ ZW_ROUTING_CONTROL,\
+ ZW_SELF_HEAL,\
+ $(CHIP)
+endif
+
+ifeq "$(LIB)" "slave_sensor"
+COMDEFINES:=ZW_SLAVE,\
+ ZW_SLAVE_ROUTING,\
+ ZW_SLAVE_SENSOR,\
+ $(CHIP)
+endif
+
+#----------------------------------------------------------------------------
+
+ifeq ($(CDEFINES),)
+CDEFINES:=$(COMDEFINES)
+else
+ifeq "$(CDEFINES)" " "
+CDEFINES:=$(COMDEFINES)
+else
+CDEFINES:=$(COMDEFINES),\
+ $(CDEFINES)
+endif
+endif
+
+ifeq ($(ADEFINES),)
+ADEFINES:=$(COMDEFINES)
+else
+ifeq "$(ADEFINES)" " "
+ADEFINES:=$(COMDEFINES)
+else
+ADEFINES:=$(COMDEFINES),\
+	  $(ADEFINES)
+endif
+endif
+
+##############
+# File lists #
+##############
+
+# Header dependency files
+#DEPENDFILES=$(RELFILES:.obj=.d)
+DEPENDFILES=$(TARGET).d
+
+# Files containing full path for source files. Used for input to "makedepend" and "Understand C++"
+CSRCFILENAMEFILES=$(RELFILES:.obj=.csrc)
+
+# Relocatable files with complete path
+RELFILESpath = $(foreach file,$(RELFILES),$(RELSDIR)\$(file),)
+
+# Header dependency files with complete path
+DEPENDFILESpath = $(foreach file,$(DEPENDFILES),$(RELSDIR)\$(file))
+
+#########
+# Rules #
+#########
+
+# If the goal is "depend" the files listed in the DEPENDFILES variable
+# should be build.
+depend: $(TARGETDIR) $(RELSDIR) $(LISTDIR) $(DEPENDFILES)
+
+$(TARGET).d: $(CSRCFILENAMEFILES)
+	@echo @echo off ^& setlocal enableextensions enabledelayedexpansion > $(RELSDIR)\domakedepend.bat
+	@echo set INC=%%KEILPATH%%\INC>> $(RELSDIR)\domakedepend.bat
+	@echo -I$(C51INC)| $(SED) "s/ *, */ -I/g" | $(SED) -e "s~\(.*\)~set DEP_INCLUDEDIRS=-I. \1~" - >> $(RELSDIR)\domakedepend.bat
+	@echo -D__C51__, $(CDEFINES)| $(SED) "s/ *, */ -D/g" | $(SED) -e "s~\(.*\)~set DEP_CDEFINES=\1~" - >> $(RELSDIR)\domakedepend.bat
+	@findstr /E /I ".c .a51" $(RELSDIR)\*.csrc | $(SED) -r -e "s/^.*\.csrc://g" | $(SED) -e :a -e "/$$/N;s/\n/ /;ta" | $(SED) -e "s~\(.*\)~set SRCS=\1~" - >> $(RELSDIR)\domakedepend.bat
+	@echo $(MAKEDEPEND)  %%DEP_INCLUDEDIRS%% -o.obj -f- %%DEP_CDEFINES%% %%SRCS%% ^> $(subst \,\\,$(RELSDIR)\$(TARGET).d) >> $(RELSDIR)\domakedepend.bat
+	@$(subst \,\\,$(RELSDIR)\domakedepend.bat)
+	@del $(RELSDIR)\domakedepend.bat
+
+# The header dependency files are not prerequisites for the
+# "depend" and "clean" goals.
+ifeq ($(filter depend,$(MAKECMDGOALS)),)
+  ifeq ($(filter clean,$(MAKECMDGOALS)),)
+    include $(RELSDIR)/*.d
+  endif
+endif
+
+#------------------------------------
+# Compile and create library files
+#------------------------------------
+
+# How to link C source files. Resulting in an AOF (absolut object file)
+# How to convert to HEX-file
+
+# Do only specify a LIBFILE to include in linking, when it is defined
+ifeq ($(origin LIBFILE), undefined)
+else
+#
+LIBFILESPEC:=$(LIBFILE)
+ifneq ($(BOOTLOADER),)
+LIBFILESPEC:=$(ZWLIBROOT)\lib\bootloader_$(CHIP)\ZW_bootloader_$(CHIP)s.lib (?C_BOOTSTARTUP),$(LIBFILESPEC)
+endif
+ifeq ($(RF_FREQ_FILE),)
+else
+LIBFILESPEC:=,$(LIBFILESPEC)
+endif
+# C_STARTUP (in ZW_startup) and ZW_main modules are mandatory. So force load them, when not linking bootloader
+# Bootloader has its own ZW_bootstartup and bootloader to replace them.
+ifeq ($(BOOTLOADER),)
+LIBFILESPEC+= (?C_STARTUP,ZW_MAIN)
+endif
+#
+endif
+
+# The Flash hexfile is build from the RELFILES plus the ZW_slave library - first we make an AOF file.
+ifeq ($(AOFFILE),)
+$(RELSDIR)\$(TARGET).aof : $(RELFILES) $(RF_FREQ_FILE) $(LIBFILE)
+else
+$(RELSDIR)\$(TARGET).aof : $(AOFFILE) $(RELFILES) $(RF_FREQ_FILE) $(LIBFILE)
+endif
+ifeq ($(AOFFILE),)
+	@echo $(RELFILESpath)$(RF_FREQ_FILE)$(LIBFILESPEC) TO $(RELSDIR)\$(TARGET).aof $(LFLAGS) > $(RELSDIR)\$(TARGET).inp
+else
+	@echo $(RELFILESpath) PUBLICSONLY ($(RELSDIR)\$(AOFFILE)),$(RF_FREQ_FILE)$(LIBFILESPEC) TO $(RELSDIR)\$(TARGET).aof $(LFLAGS) > $(RELSDIR)\$(TARGET).inp
+endif
+	@$(LN) @$(subst \,\\,$(RELSDIR)\)$(TARGET).inp
+	@rename $@ $(notdir $(subst \,/,$@))
+	@del $(RELSDIR)\$(TARGET).inp
+
+ifneq ($(AOFFILE),)
+OTA_DEPENDENCY:=$(TARGET)_OTA.hex $(subst .aof,.hex,$(AOFFILE)) $(AOFFILE)
+$(TARGET)_OTA.hex: $(RELSDIR)\$(TARGET).aof $(subst .aof,.hex,$(AOFFILE)) $(AOFFILE)
+endif # /* ifneq ($(AOFFILE),) */
+
+# The Flash hexfile is made from the AOF file
+$(TARGET).hex: $(RELSDIR)\$(TARGET).aof $(OTA_DEPENDENCY)
+	@echo converting $(RELSDIR)\$(TARGET).aof to hex
+	@copy $(RELSDIR)\$(TARGET).aof $(RELSDIR)\temp.aof
+	@$(HEX) $(subst \,\\,$(RELSDIR)\temp.aof) HEXFILE($(subst \,\\,$(TARGETDIR)\temp.hex))
+	@del $(RELSDIR)\temp.aof
+	@if exist $(subst \,\\,$(TARGETDIR)\$(TARGET).hex) del $(subst \,\\,$(TARGETDIR)\$(TARGET).hex)
+	@ren $(subst \,\\,$(TARGETDIR)\temp.hex) $(TARGET).hex
+#	@$(HEX) $(subst \,\\,$(RELSDIR)\$(TARGET).aof) HEXFILE($(subst \,\\,$(TARGETDIR)\$(TARGET).hex))
+ifneq ($(AOFFILE),)
+	@echo Fixing CRC in $@
+	$(FIXBOOTCRC) 0 $(subst \,\\,$(TARGETDIR)\$(TARGET).hex)
+	del $(subst \,\\,$(TARGETDIR)\$(TARGET)).hex
+	rename $(subst \,\\,$(TARGETDIR)\$(TARGET))-crc.hex $@
+# Merge the application and bootloader hex files together, selecting the reset vector from the bootloader
+	$(SREC) $(TARGETDIR)\$(TARGET).hex -Intel -crop 0x0003 0x07000 $(subst .aof,.hex,$(TARGETDIR)\$(AOFFILE)) -Intel -crop 0x0000 0x10000 -Output $(TARGETDIR)\$(TARGET)_merged.hex -Intel -address-length=2 -DO -Line_Length 44
+	@if exist $(subst \,\\,$(TARGETDIR)\$(TARGET)_OTA.hex) del $(subst \,\\,$(TARGETDIR)\$(TARGET)_OTA.hex)
+	rename $(TARGETDIR)\$(TARGET).hex $(TARGET)_OTA.hex
+	rename $(TARGETDIR)\$(TARGET)_merged.hex $(TARGET).hex
+endif # /* ifneq ($(AOFFILE),) */
+	@echo $(shell date /T) $(shell time /T)
+#	@..\\..\\..\\zensystools\\texttools\\getappsize_perl $(TARGET)
